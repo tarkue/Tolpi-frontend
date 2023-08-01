@@ -1,0 +1,26 @@
+.SelectCountryHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+
+    gap: var(--gap--4);
+
+    cursor: pointer;
+}
+
+.Subtitle {
+    display: flex;
+    align-items: center;
+
+    opacity: var(--opacity-40);
+}
+
+.Subtitle svg {
+    width: var(--subtitle--icon_size);
+    height: var(--subtitle--icon_size);
+}
+
+.Subtitle svg path {
+    fill: var(--black);
+}

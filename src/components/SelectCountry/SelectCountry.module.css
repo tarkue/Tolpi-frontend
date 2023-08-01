@@ -1,0 +1,30 @@
+.SelectCountry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    gap: 40px;
+
+    width: 100dvw;
+    height: 70dvh;
+    padding-top: var(--indent-60);
+    padding-bottom: 0;
+
+    background: var(--internal--body_color);
+    border-radius: var(--border_radius--36);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    position: absolute;
+    bottom: 0;
+}
+
+.Content {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-bottom: var(--indent-20);
+}

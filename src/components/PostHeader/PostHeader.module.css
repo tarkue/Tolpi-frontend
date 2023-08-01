@@ -1,0 +1,19 @@
+.PostHeader {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+
+    gap: var(--gap--8);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--gap--4);
+}
+
+.Time {
+    opacity: var(--opacity-50);
+}

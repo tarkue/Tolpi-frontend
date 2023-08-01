@@ -1,0 +1,23 @@
+.Alert {
+    display: flex;
+    align-items: center;
+    
+    width: calc(100dvw - var(--indent-80));
+
+    gap: var(--gap--15);
+    padding: var(--indent-20);
+
+    background: var(--internal--card_color);
+    border-radius: var(--border_radius--36);
+
+    position: absolute;
+    top: var(--indent-60);
+}
+
+.Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1 0 0;
+}

@@ -1,0 +1,5 @@
+.Avatar {
+    border-radius: var(--border_radius--circle);
+    
+    cursor: pointer;
+}

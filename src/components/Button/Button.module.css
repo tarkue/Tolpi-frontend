@@ -1,0 +1,42 @@
+.Button {
+    height: var(--button-height);
+    width: var(--button-width);
+
+    text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    gap: var(--gap--4);
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.Start {
+    width: var(--start-width);
+    background: var(--background);
+    border-radius: var(--border_radius--24);
+}
+
+.Primary {
+    background: var(--background);
+    border-radius: var(--border_radius--18);
+}
+
+.Outline {
+    border: var(--internal--border);
+    border-color: var(--background);
+    border-radius: var(--border_radius--18);
+}
+
+
+.Button svg {
+    width: var(--button-icon_size);
+    height: var(--button-icon_size);
+}
+
+.Button svg path {
+    stroke: var(--color);
+}

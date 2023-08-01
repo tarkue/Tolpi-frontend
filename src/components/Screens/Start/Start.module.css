@@ -1,0 +1,39 @@
+.Content {
+    position: relative;
+
+    height: calc(100dvh - 4*var(--indent-60));
+    width: 100%
+
+}
+
+.StartText {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: var(--start-width);
+    height: min-content;
+
+    margin: auto;
+}
+
+.StartText p {
+    margin-top: var(--indent-40);
+
+    opacity: var(--opacity-90);
+}
+
+.ButtonWrapper {
+
+    position: absolute;
+    width: min-content;
+
+    left: 0;
+    right: 0;
+
+    bottom: var(--indent-40);
+
+    margin: auto;
+}

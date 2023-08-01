@@ -1,0 +1,30 @@
+.AdCard {
+    border: var(--internal--border);
+    border-color: var(--internal--border_color);
+    border-radius: var(--border_radius--24);
+
+    box-shadow: 0px 0px 14px 0px rgba(178, 178, 178, 0.05) inset;
+
+    overflow: hidden;
+
+}
+
+.Small {
+    width: var(--ad_card--min);
+    height: var(--ad_card--min);
+}
+
+.Small img {
+    width: var(--ad_card--min);
+    height: var(--ad_card--min);
+}
+
+.Big {
+    height: var(--ad_card--min);
+    width: var(--ad_card--max);
+}
+
+.Big img {
+    width: var(--ad_card--max);
+    height: var(--ad_card--min);
+}

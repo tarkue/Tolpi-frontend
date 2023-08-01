@@ -1,0 +1,23 @@
+.CreateTolpi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: var(--gap--40);
+    
+    width: fit-content;
+    padding: var(--indent-20);
+    padding-top: var(--indent-60);
+
+    background: var(--internal--body_color);
+    border-radius: var(--border_radius--36);
+}
+
+.CreateTolpiWrapper {
+    width: 100dvw;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

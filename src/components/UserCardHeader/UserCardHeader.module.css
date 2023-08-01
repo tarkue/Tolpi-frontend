@@ -1,0 +1,10 @@
+.UserCardHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--gap--10);
+    align-self: stretch;
+}
+
+.UserCardHeader p {
+    width: 100%;
+}

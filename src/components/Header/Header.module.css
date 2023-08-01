@@ -1,0 +1,30 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: calc(100dvw - var(--indent-80));
+    height: 44px;
+}
+
+.HeaderBack {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    gap: var(--gap--10);
+
+    width: calc(100dvw - var(--indent-80));
+}
+
+
+.HeaderBack svg {
+    cursor: pointer;
+    
+    width: var(--header--back_icon_size);
+    height: var(--header--back_icon_size);
+}
+
+.HeaderBack svg path {
+    fill: var(--black);
+}

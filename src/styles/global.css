@@ -1,0 +1,37 @@
+
+html {
+    -webkit-text-rendering: optimizeSpeed;
+    text-rendering: optimizeSpeed;
+
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: subpixel-antialiased;
+
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    --font_regular: var(--regular), -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font_semibold: var(--semibold), -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    overflow-x: hidden;
+
+    background: var(--internal--body_color);
+}
+
+img {
+    line-height: 1;
+    display: block;
+}
+
+h1, h2, h6, p {
+    margin: 0;
+    padding: 0;
+}

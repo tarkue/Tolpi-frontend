@@ -1,0 +1,11 @@
+.Popup {
+    width: 100dvw;
+    height: 100dvh;
+
+    background: var(--popup-background);
+
+    position: absolute;
+    z-index: 1;
+    top: var(--topScroll);
+    left: 0;
+}
