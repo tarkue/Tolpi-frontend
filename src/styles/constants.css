@@ -71,11 +71,6 @@
     --line-height-start_text: 125%;
 
 
-    /* Animation */
-    --animate--ease_in_out: cubic-bezier(0.770, 0.000, 0.175, 1.000);
-    --animate--time: .3s;
-    --animate--timeshort: .5s;
-
     /* Button */
     --button-height: 60px;
     --button-width: calc(100dvw - var(--indent-80));

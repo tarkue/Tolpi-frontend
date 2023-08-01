@@ -10,6 +10,7 @@
     "deploy": "vk-miniapps-deploy"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.3",
     "@svgr/webpack": "^8.0.1",
     "@vkontakte/vk-bridge": "^2.8.3",
     "@vkontakte/vk-miniapps-deploy": "^0.1.5",

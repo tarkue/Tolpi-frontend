@@ -1,9 +1,7 @@
-import { MainName, StartName } from "@/components/Screens/names";
-import { Start } from "@/config/config";
 import { create } from "zustand";
 
 export const useAppStore = create((set) => ({
-    panel: StartName,
+    panel: null,
     popup: null,
 
     profileId: "",

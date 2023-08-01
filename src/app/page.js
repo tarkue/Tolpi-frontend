@@ -20,9 +20,16 @@ import bridge from '@vkontakte/vk-bridge';
 import { useUserStore } from "@/store/userStore";
 import { useAppStore } from "@/store/appStore";
 import { CreateTolpiPopup, SelectCountryPopup, nonPopup } from "@/components/Popup/types";
+import { useSpring, useSpringRef, animated } from "@react-spring/web";
 
 
 export default function Page() {
+  const api = useSpringRef()
+  const springs = useSpring({
+    from: { y: "20%", opacity: 0 },
+    to: { y: "0%", opacity: 1 }
+  })
+
   const setPhoto = useUserStore(state => state.setPhoto)
   const setUserId = useUserStore(state => state.setId)
   const setUserName = useUserStore(state => state.setName)
@@ -32,12 +39,22 @@ export default function Page() {
   const setPanel = useAppStore(state => state.setPanel)
   const popup = useAppStore(state => state.popup)
   const setPopup = useAppStore(state => state.setPopup)
-  
 
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
+
+  // Popup
+  useEffect(() => {
+    if (popup || loader) {
+        document.body.children[0].style.overflowY = "hidden"
+    } else {
+        document.body.children[0].style.overflowY = "auto"
+    }
+  }, [popup, loader])
 
   // VK INIT 
   useEffect(() => {
+    setLoader(true)
+    
     bridge.send("VKWebAppInit");
     bridge.send("VKWebAppGetUserInfo")
       .then((data) => {
@@ -49,25 +66,19 @@ export default function Page() {
         })
         .then((data) => {
           setStatus(data.keys[0].value)
-          setPanel(MainName)
         })
         .catch(() => setPanel(StartName))
-        setTimeout(() => setLoader(false), 2000)
+        setTimeout(() => {
+          setLoader(false)
+          setPanel(MainName)
+        }, 3000)
       }) 
   },[])
 
-  useEffect(() => {
-    if (popup) {
-        document.body.children[0].style.overflowY = "hidden"
-    } else {
-        document.body.children[0].style.overflowY = "auto"
-    }
-  }, [popup])
 
+  // Animate
 
-
-
-  return <>
+  return <animated.div style={springs}>
     {loader ? <Loader /> : <>
     {popup ? <Popup popupView={popup}>
 
@@ -87,5 +98,5 @@ export default function Page() {
         panelId={StartName} 
       />
     </Panel></>}
-  </>
+  </animated.div>
 }

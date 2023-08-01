@@ -36,7 +36,7 @@ export default function Main() {
     const UserName = useUserStore(state => state.name)
     
     
-    const setPanelAvatar = () => {
+    const goToProfile = () => {
         setProfileId(UserId)
         setProfilePhoto(UserPhoto)
         setProfileStatus(UserStatus)
@@ -46,12 +46,13 @@ export default function Main() {
         setPanel(ProfileName)
     }
 
+
     return <>
         <DefaultHeader 
             subtitle={"Ваш город"} 
             country={"Екатеринбург"}
             userAvatar={UserPhoto}
-            setPanelAvatar={() => setPanelAvatar()}
+            setPanelAvatar={goToProfile}
             onClick={() => {setPopup(SelectCountryPopup)}}
         />
         <AdList>
@@ -71,6 +72,21 @@ export default function Main() {
             Толпи в <br /><Span color={accentColor}>вашем городе</Span>
         </ScreenTitle>
         <Column>
+            <Post 
+                userName={"Евгений Смирнов"} 
+                time={1690268748} 
+                text={"приглашаю на концерт дайте танк завтра в 18:00. Хейтеров прошу не писать"}
+            />
+            <Post 
+                userName={"Евгений Смирнов"} 
+                time={1690268748} 
+                text={"приглашаю на концерт дайте танк завтра в 18:00. Хейтеров прошу не писать"}
+            />
+            <Post 
+                userName={"Евгений Смирнов"} 
+                time={1690268748} 
+                text={"приглашаю на концерт дайте танк завтра в 18:00. Хейтеров прошу не писать"}
+            />
             <Post 
                 userName={"Евгений Смирнов"} 
                 time={1690268748} 

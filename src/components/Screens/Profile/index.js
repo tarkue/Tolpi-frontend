@@ -14,6 +14,7 @@ import { useUserStore } from "@/store/userStore"
 import { MainName } from "../names"
 import { BookMark, SadEmoti } from "@/components/Icons"
 import { Outline, Primary } from "@/components/Button/types"
+import { useEffect } from "react"
 
 
 /**
@@ -44,7 +45,7 @@ export default function Profile() {
                 stat={profileStats}
                 status={profileStatus}
             />
-            {profileId == userId ? <>
+            {profileId != userId ? <>
                 <Button icon={<BookMark/>} type={Primary} color={accentColor}>
                     Отслеживать
                 </Button>
