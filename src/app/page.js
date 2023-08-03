@@ -80,16 +80,16 @@ export default function Page() {
 
   return <animated.div style={springs}>
     {loader ? <Loader /> : <>
-    {popup ? <Popup popupView={popup}>
+    {<Popup popupView={popup}>
 
       {popup == SelectCountryPopup ? <SelectCountry 
-        setPopupView={() => setPopup(nonPopup)}
+        setPopupView={setPopup}
       /> : <></>}
       {popup == CreateTolpiPopup ? <CreateTolpi 
-        setPopupView={() => setPopup(nonPopup)}
+        setPopupView={setPopup}
       /> : <></>}
       
-    </Popup> : <></>}
+    </Popup>}
 
     <Panel ActivePanel={panel}>
       <Main panelId={MainName}/>
