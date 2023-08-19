@@ -31,6 +31,7 @@ export default function Post({userName, time, userId, text, avatar, active}) {
             type={Outline}
             color={accentColor}
             href={VK + "im?sel=" + userId}
+            target="_blank"
         >
             толпиться
         </Button> : ""}

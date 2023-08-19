@@ -30,6 +30,7 @@ import { ADS_LINKS } from "@/config/config"
 export default function Main() {
     const [loader, setLoader] = useState(true)
 
+    const popup = useAppStore(state => state.popup)
     const setPopup = useAppStore(state => state.setPopup)
 
     const tolpiesList = useAppStore(state => state.tolpiesList)
@@ -61,7 +62,7 @@ export default function Main() {
 
 
     useEffect(() => {
-        if (lastMainTop != 0) {
+        if (lastMainTop != 0 && !popup) {
             document.body.children[0].scrollTo({top: lastMainTop})
         }
     })

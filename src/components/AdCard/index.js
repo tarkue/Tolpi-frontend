@@ -10,7 +10,7 @@ import s from "./AdCard.module.css"
 export default function AdCard({src, type, href}) {
     const classes = classNames(s.AdCard, type == smallAd ? s.Small : s.Big)
     return <>
-        <a className={classes} href={href}>
+        <a className={classes} href={href} target="_blank">
             <Image 
                 height={103} 
                 width={type == smallAd ? 103: 187} 

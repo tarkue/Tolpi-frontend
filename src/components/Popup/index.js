@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import s from "./Popup.module.css"
 
 import { useSpring, animated } from "@react-spring/web"
+import { useAppStore } from "@/store/appStore"
 
 
 /**
@@ -12,6 +13,7 @@ export default function Popup({ children, popupView }) {
     const [scrollY, setScrollY] = useState(0)
     const [popup, setPopup] = useState(false)
     const [isAnimate, setIsAnimate] = useState(false)
+    const setLastMainTop = useAppStore(state => state.setLastMainTop)
     
     const [springs, api] = useSpring(
         () => ({
@@ -21,7 +23,6 @@ export default function Popup({ children, popupView }) {
         []
     )
     useEffect(() => {
-        setScrollY(document.body.children[0].scrollTop + "px")
         if (popupView) {
             setIsAnimate(true)
         } else {
@@ -32,6 +33,8 @@ export default function Popup({ children, popupView }) {
     }, [popupView])
 
     useEffect(() => {
+        setLastMainTop(document.body.children[0].scrollTop)
+        setScrollY(document.body.children[0].scrollTop + "px")
         if (isAnimate && popupView && !popup) {
             setPopup(true)
             
