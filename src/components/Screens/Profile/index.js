@@ -107,7 +107,7 @@ export default function Profile() {
 
     function sendReport() {
         copyToClipboard(sendReportText(profileId))    
-        return location.href = CHAT_URL
+        return window.open(CHAT_URL, '_blank')
     }
       
     return loader ? <Loader panel={true}/> : <>

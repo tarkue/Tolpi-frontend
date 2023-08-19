@@ -39,8 +39,10 @@ const ADS_LINKS = {
 
 const CHAT_URL = "https://vk.com/im?media=&sel=-222099365"
 
+const HH_AREAS_API = "https://api.hh.ru/areas"
+
 export {
     VK, VK_API_V, APP_ID, StartInfo, 
     MOST_POPULAR_COUNTRIES, ADS_LINKS,
-    CHAT_URL
+    CHAT_URL, HH_AREAS_API
 }

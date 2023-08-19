@@ -1,3 +1,4 @@
+import { HH_AREAS_API } from "@/config/config";
 import { getVKLink } from "@/service/service";
 import axios from "axios";
 
@@ -25,7 +26,7 @@ const server = {
 
     async getCountry() {
         let countryes = []
-        await client.get(`/getCountry?${getVKLink()}`).then((data) => {
+        await axios.get(HH_AREAS_API).then((data) => {
             const areas = data.data[0].areas
 
             for (let i = 0; i < areas.length; i++) {      
