@@ -17,7 +17,7 @@ export default function TolpiesList({tolpiesList, profile}) {
         if (profile) setNotTolpiesWarningText("Здесь пусто...")
         else setNotTolpiesWarningText("Время стать первым!")
     }, [])
-    return <div style={{paddingBottom: "var(--gap-20)"}}>
+    return <div style={{paddingBottom: "var(--indent-20)"}}>
         <Column>
             {!(tolpiesList.length > 0) ? <NotTolpiesWarning color={blackTextColor}>
                 {notTolpiesWarningText}
