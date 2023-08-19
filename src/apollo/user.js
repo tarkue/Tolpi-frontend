@@ -3,8 +3,6 @@ import { gql } from "@apollo/client";
 export const createUser = gql`
     mutation CreateUser {
         createUser {
-            userId
-            avatar
             country
         }
     }

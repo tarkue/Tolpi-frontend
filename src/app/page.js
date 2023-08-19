@@ -55,13 +55,13 @@ export default function Page() {
       setPanel(MainName)
       TolpiUserCreate({
         onCompleted(data) {
-          upUser(data.createUser.userId, data.createUser.avatar)
           if (data.createUser.country) {
             setAppCountry(data.createUser.country)
           }
-          setTimeout(()=> setLoaderPanel(false), 3000)
+          setTimeout(()=> setLoaderPanel(false), 1000)
         }
       })
+      bridge.send("VKWebAppGetUserInfo").then(data => upUser(data.id, data.photo_100))
       bridge.send("VKWebAppInit");
       bridge.send("VKWebAppStorageGet", {
         keys: ["start"]
