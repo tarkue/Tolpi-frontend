@@ -59,6 +59,7 @@ export default function Page() {
           if (data.createUser.country) {
             setAppCountry(data.createUser.country)
           }
+          setTimeout(()=> setLoaderPanel(false), 3000)
         }
       })
       bridge.send("VKWebAppInit");
@@ -72,7 +73,6 @@ export default function Page() {
         }
       })  
     }
-    setTimeout(()=> setLoaderPanel(false), 3000)
   },[panel])
 
   useEffect(() => {
