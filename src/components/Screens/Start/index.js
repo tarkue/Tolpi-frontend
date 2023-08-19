@@ -23,9 +23,6 @@ import axios from "axios";
 */
 export default function Start() {
     const setToken = useUserStore(state => state.setToken)
-    const setStatus = useUserStore(state => state.setStatus)
-    const token = useUserStore(state => state.token)
-    const profileId = useUserStore(state => state.id)
 
     const setPanel = useAppStore(state => state.setPanel)
     const [k, setK] = useState(0)
@@ -33,23 +30,12 @@ export default function Start() {
 
     const buttonHandler = () => {
         
-        if (k > 0 && k != (StartInfo.length-1)) {
-            bridge.send("VKWebAppGetAuthToken", {
-                app_id: APP_ID,
-                scope: "status"
-            })
-            .then((data) => {
-                setToken(data.access_token)
-                setK(StartInfo.length-1)
-            })
-            .catch((data) => {
-                console.log(data)
-                if (k < (StartInfo.length-2)) {
-                    setK(k+1)
-                }
-            })
-        } else if (k == StartInfo.length-1) {
+         if (k == StartInfo.length-1) {
             setPanel(MainName)
+            bridge.send("VKWebAppStorageSet", {
+                key: "start",
+                value: "true"
+            })
         } else {
             setK(k+1)
         }

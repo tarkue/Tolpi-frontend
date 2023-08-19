@@ -1,3 +1,13 @@
+.AlertWrapper {
+    display: flex;
+    justify-content: center;
+
+    width: 100dvw;
+
+    position: absolute;
+    top: var(--indent-60);
+}
+
 .Alert {
     display: flex;
     align-items: center;
@@ -10,8 +20,7 @@
     background: var(--internal--card_color);
     border-radius: var(--border_radius--36);
 
-    position: absolute;
-    top: var(--indent-60);
+
 }
 
 .Content {

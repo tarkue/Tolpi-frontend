@@ -11,6 +11,8 @@
 
     background: var(--internal--body_color);
     border-radius: var(--border_radius--36);
+
+    box-shadow: var(--shadow);
 }
 
 .CreateTolpiWrapper {

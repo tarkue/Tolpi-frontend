@@ -3,6 +3,7 @@ import Text from "../Typography/Text"
 
 import UserCardHeader from "../UserCardHeader"
 import UserCardStatistics from "../UserCardStatistics"
+import { blackTextColor } from "../colors"
 
 import s from "./UserCard.module.css"
 
@@ -20,7 +21,7 @@ export default function UserCard(props) {
             userName={userName}
             userLink={userLink}
         />
-        {status ? <Text>
+        {status ? <Text color={blackTextColor}>
             {status}
         </Text> : <></>}
         <UserCardStatistics stat={stat}/>

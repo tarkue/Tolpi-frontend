@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import s from "./Popup.module.css"
 
-import { useSpring, animated, easings } from "@react-spring/web"
+import { useSpring, animated } from "@react-spring/web"
 
 
 /**
@@ -11,6 +11,7 @@ export default function Popup({ children, popupView }) {
     
     const [scrollY, setScrollY] = useState(0)
     const [popup, setPopup] = useState(false)
+    const [isAnimate, setIsAnimate] = useState(false)
     
     const [springs, api] = useSpring(
         () => ({
@@ -19,17 +20,26 @@ export default function Popup({ children, popupView }) {
         }),
         []
     )
-
     useEffect(() => {
         setScrollY(document.body.children[0].scrollTop + "px")
         if (popupView) {
-            setPopup(true)
+            setIsAnimate(true)
+        } else {
+            if (popup) {
+                setIsAnimate(false)
+            }
+        }
+    }, [popupView])
 
+    useEffect(() => {
+        if (isAnimate && popupView && !popup) {
+            setPopup(true)
+            
             api.start({
                 from: { background: "rgba(0,0,0,0)" },
                 to: { background: "rgba(34, 43, 61, 0.45)" },  
             })
-        } else {
+        } else if (!popupView && popup) {
             api.start({
                 from: { background: "rgba(34, 43, 61, 0.45)" },
                 to: { background: "rgba(34, 43, 61, 0)" }, 
@@ -41,7 +51,7 @@ export default function Popup({ children, popupView }) {
                 }
             })
         }
-    }, [popupView])
+    }, [isAnimate])
     return <>
         {popup ? <animated.div 
             className={s.Popup} style={{"--topScroll": scrollY, ...springs}}

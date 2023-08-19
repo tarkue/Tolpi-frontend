@@ -2,101 +2,119 @@
 import { useState, useEffect } from "react";
 
 import Panel from '@/components/Panel'
-
 import Main from "@/components/Screens/Main";
 import Profile from "@/components/Screens/Profile";
 import Start from "@/components/Screens/Start";
-
-import { MainName, ProfileName, StartName } from "@/components/Screens/names";
-
 import Loader from "@/components/Loader";
-
 import Popup from "@/components/Popup"
 import CreateTolpi from "@/components/CreateTolpi"
 import SelectCountry from "@/components/SelectCountry"
+
+import { MainName, ProfileName, StartName } from "@/components/Screens/names";
+import { CreateTolpiPopup, SelectCountryPopup } from "@/components/Popup/types";
 
 import bridge from '@vkontakte/vk-bridge';
 
 import { useUserStore } from "@/store/userStore";
 import { useAppStore } from "@/store/appStore";
-import { CreateTolpiPopup, SelectCountryPopup, nonPopup } from "@/components/Popup/types";
-import { useSpring, useSpringRef, animated } from "@react-spring/web";
+
+import { useSpring, animated } from "@react-spring/web";
+
+import { useMutation } from "@apollo/client";
+import { createUser } from "@/apollo/user";
+
+import server from "@/server/server";
 
 
 export default function Page() {
-  const api = useSpringRef()
-  const springs = useSpring({
-    from: { y: "20%", opacity: 0 },
-    to: { y: "0%", opacity: 1 }
-  })
+  const [springs, api] = useSpring(
+    () => ({
+        from: { y: "20%", opacity: 0  },
+        to: { y: "0%", opacity: 1 },  
+    }),
+    []
+  )
+  const [isAnimate, setIsAnimate] = useState(false)
 
-  const setPhoto = useUserStore(state => state.setPhoto)
-  const setUserId = useUserStore(state => state.setId)
-  const setUserName = useUserStore(state => state.setName)
-  const setStatus = useUserStore(state => state.setStatus)
+  const upUser = useUserStore(state => state.upUser)
+  const setAppCountry = useAppStore(state => state.setCountry)
 
   const panel = useAppStore(state => state.panel)
   const setPanel = useAppStore(state => state.setPanel)
+
   const popup = useAppStore(state => state.popup)
   const setPopup = useAppStore(state => state.setPopup)
 
-  const [loader, setLoader] = useState(false);
+  const loaderPanel = useAppStore(state => state.loaderPanel);
+  const setLoaderPanel = useAppStore(state => state.setLoaderPanel);
 
-  // Popup
-  useEffect(() => {
-    if (popup || loader) {
-        document.body.children[0].style.overflowY = "hidden"
-    } else {
-        document.body.children[0].style.overflowY = "auto"
-    }
-  }, [popup, loader])
-
+  const setCountries = useAppStore(state => state.setCountries);
+  const [TolpiUserCreate, createUserData] = useMutation(createUser, {})
+  
   // VK INIT 
   useEffect(() => {
-    setLoader(true)
-    
-    bridge.send("VKWebAppInit");
-    bridge.send("VKWebAppGetUserInfo")
-      .then((data) => {
-        setUserId(data.id)
-        setUserName([data.first_name, data.last_name].join(" "))
-        setPhoto(data.photo_100)
-        bridge.send("VKWebAppStorageGet", {
-          keys: ["status"]
-        })
-        .then((data) => {
-          setStatus(data.keys[0].value)
-        })
-        .catch(() => setPanel(StartName))
-        setTimeout(() => {
-          setLoader(false)
+    if (!panel) {
+      setPanel(MainName)
+      TolpiUserCreate({
+        onCompleted(data) {
+          upUser(data.createUser.userId, data.createUser.avatar)
+          if (data.createUser.country) {
+            setAppCountry(data.createUser.country)
+          }
+        }
+      })
+      server.getCountry().then(c => setCountries(c))
+      bridge.send("VKWebAppInit");
+      bridge.send("VKWebAppStorageGet", {
+        keys: ["start"]
+      }).then((data) => {
+        if (data.keys[0].value == "") {
+          setPanel(StartName)
+        } else {
           setPanel(MainName)
-        }, 3000)
-      }) 
-  },[])
+        }
 
+      })  
+    }
+    setTimeout(()=> setLoaderPanel(false), 3000)
+  },[panel])
 
-  // Animate
+  useEffect(() => {
+    if (loaderPanel) {
+      setIsAnimate(true)
+    }
+  }, [loaderPanel])
+
+  useEffect(() => {
+    if (loaderPanel && isAnimate) {
+      api.start({
+        from: { y: "20%", opacity: 0  },
+        to: { y: "0%", opacity: 1 },  
+        onResolve() {
+          setIsAnimate(false)
+        }
+      })
+    }
+    
+  }, [isAnimate])
 
   return <animated.div style={springs}>
-    {loader ? <Loader /> : <>
+    {loaderPanel ? <Loader /> : <>
     {<Popup popupView={popup}>
-
       {popup == SelectCountryPopup ? <SelectCountry 
+        popupView={popup}
         setPopupView={setPopup}
       /> : <></>}
       {popup == CreateTolpiPopup ? <CreateTolpi 
+        popupView={popup}
         setPopupView={setPopup}
       /> : <></>}
-      
     </Popup>}
 
     <Panel ActivePanel={panel}>
       <Main panelId={MainName}/>
       <Profile panelId={ProfileName}/>
-      <Start 
-        panelId={StartName} 
-      />
+      <Start panelId={StartName}/>
     </Panel></>}
   </animated.div>
 }

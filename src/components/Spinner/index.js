@@ -5,6 +5,7 @@ import Pie from './src/Pie';
 import dynamic from 'next/dynamic';
 
 import { SmallSpinner } from "./sizes"
+import { accentColor } from '../colors';
 
 export const ArcTypes = {
   FILLED: 'filled',
@@ -23,7 +24,7 @@ class Spinner extends Component {
 
   static defaultProps = {
     size: SmallSpinner,
-    color: "#000",
+    color: accentColor,
     segments: 3,
     segmentMax: 65,
     padding: 4,

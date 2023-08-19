@@ -1,6 +1,6 @@
 .Loader {
     width: 100%;
-    height: 100dvh;
+    height: calc(100dvh - var(--padding));
 
     display: flex;
     justify-content: center;

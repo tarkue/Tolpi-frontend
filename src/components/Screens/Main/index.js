@@ -2,11 +2,9 @@ import AdCard from "@/components/AdCard"
 import { bigAd, smallAd } from "@/components/AdCard/types"
 import Button from "@/components/Button"
 import { Primary } from "@/components/Button/types"
-import Column from "@/components/Column"
-
 import DefaultHeader from "@/components/Header/Default"
 import { Edit } from "@/components/Icons"
-import Post from "@/components/Post"
+
 import AdList from "@/components/AdList"
 import Span from "@/components/Span"
 import ScreenTitle from "@/components/Typography/ScreenTitle"
@@ -15,49 +13,88 @@ import { accentColor, blackTextColor, cardColor } from "@/components/colors"
 import { useUserStore } from "@/store/userStore"
 import { useAppStore } from "@/store/appStore"
 import { CreateTolpiPopup, SelectCountryPopup } from "@/components/Popup/types"
-import { ProfileName } from "../names"
+
+import { useEffect, useState } from "react"
+import { useQuery, useSubscription } from "@apollo/client"
+import { getAllTolpi, getSubscribeTolpi } from "@/apollo/tolpi"
+import TolpiesList from "@/components/TolpiesList/TolpiesList"
+
+import Spinner from "@/components/Spinner"
+import { tolpiContains } from "@/service/service"
+import { ADS_LINKS } from "@/config/config"
 
 
 /**
  * Main Screen 
 */
 export default function Main() {
-    const setPanel = useAppStore(state => state.setPanel)
+    const [loader, setLoader] = useState(true)
+
     const setPopup = useAppStore(state => state.setPopup)
 
-    const setProfileId = useAppStore(state => state.setProfileId)
-    const setProfilePhoto = useAppStore(state => state.setProfilePhoto)
-    const setProfileStatus = useAppStore(state => state.setProfileStatus)
-    const setProfileName = useAppStore(state => state.setProfileName)
+    const tolpiesList = useAppStore(state => state.tolpiesList)
+    const setTolpiesList = useAppStore(state => state.setTolpiesList)
 
-    const UserId = useUserStore(state => state.id)
-    const UserPhoto = useUserStore(state => state.photo)
-    const UserStatus = useUserStore(state => state.status)
-    const UserName = useUserStore(state => state.name)
+    const goToProfile = useAppStore(state => state.goToProfile)
     
+    const country = useAppStore(state => state.country)
     
-    const goToProfile = () => {
-        setProfileId(UserId)
-        setProfilePhoto(UserPhoto)
-        setProfileStatus(UserStatus)
-        setProfilePhoto(UserPhoto)
-        setProfileName(UserName)
+    const userPhoto = useUserStore(state => state.photo)
+    const userId = useUserStore(state => state.id)
 
-        setPanel(ProfileName)
-    }
+    const lastMainTop = useAppStore(state => state.lastMainTop)
+
+    
+    const query = useQuery(getAllTolpi, {
+        variables: {
+            "country": country
+        },
+        onCompleted() {
+            setLoader(false)
+            setTolpiesList(query.data.Tolpies)
+        },
+    })
+
+    useEffect(() => {
+        setLoader(true)
+    }, [country])
 
 
+    useEffect(() => {
+        if (lastMainTop != 0) {
+            document.body.children[0].scrollTo({top: lastMainTop})
+        }
+    })
+
+    useSubscription(getSubscribeTolpi, {
+        onData(data) {
+            if (data.data.data) {
+                let last = data.data.data.Tolpies.length-1
+                let item = data.data.data.Tolpies[last]
+
+                if (tolpiesList) {
+                    if (!tolpiContains(tolpiesList, item)) {
+                        setTolpiesList([item, ...tolpiesList])
+                      
+                    }
+                    return 
+                }
+                setTolpiesList(item)
+            }
+        }
+    })
+    
     return <>
         <DefaultHeader 
             subtitle={"Ваш город"} 
-            country={"Екатеринбург"}
-            userAvatar={UserPhoto}
-            setPanelAvatar={goToProfile}
+            country={country}
+            userAvatar={userPhoto}
+            setPanelAvatar={() => goToProfile(userId, document.body.children[0].scrollTop)}
             onClick={() => {setPopup(SelectCountryPopup)}}
         />
         <AdList>
-            <AdCard src={"/bigAd.svg"} type={bigAd}/>
-            <AdCard src={"/smallAd.svg"} type={smallAd}/>
+            <AdCard src={"/bigAd.svg"} type={bigAd} href={ADS_LINKS.BIG_AD}/>
+            <AdCard src={"/smallAd.svg"} type={smallAd} href={ADS_LINKS.SMALL_AD}/>
         </AdList>
         <Button 
             icon={<Edit/>} type={Primary} color={cardColor} 
@@ -71,27 +108,6 @@ export default function Main() {
         >
             Толпи в <br /><Span color={accentColor}>вашем городе</Span>
         </ScreenTitle>
-        <Column>
-            <Post 
-                userName={"Евгений Смирнов"} 
-                time={1690268748} 
-                text={"приглашаю на концерт дайте танк завтра в 18:00. Хейтеров прошу не писать"}
-            />
-            <Post 
-                userName={"Евгений Смирнов"} 
-                time={1690268748} 
-                text={"приглашаю на концерт дайте танк завтра в 18:00. Хейтеров прошу не писать"}
-            />
-            <Post 
-                userName={"Евгений Смирнов"} 
-                time={1690268748} 
-                text={"приглашаю на концерт дайте танк завтра в 18:00. Хейтеров прошу не писать"}
-            />
-            <Post 
-                userName={"Евгений Смирнов"} 
-                time={1690268748} 
-                text={"приглашаю на концерт дайте танк завтра в 18:00. Хейтеров прошу не писать"}
-            />
-        </Column>
+        {loader ? <Spinner/> : <TolpiesList tolpiesList={tolpiesList}/>}
     </>
 }

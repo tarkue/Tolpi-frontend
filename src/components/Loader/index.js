@@ -7,9 +7,9 @@ import { accentColor } from "@/components/colors"
 /**
  * Loader  
 */
-export default function Loader() {
+export default function Loader({ panel }) {
 
-    return <div className={s.Loader}>
+    return <div className={s.Loader} style={{"--padding": panel ? "calc(2 * var(--indent-60))" : "0px"}}>
         <Spinner size={LargeSpinner} color={accentColor}/>
     </div>
 }

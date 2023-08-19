@@ -57,6 +57,7 @@
     --font_size--country: 18px;
     --font_size--vk_link: 18px;
     --font_size--name: 18px;
+    --font_size--not_tolpies: 18px
     --font_size--button_text: 16px;
     --font_size--mark: 16px;
     --font_size--text: 16px;
@@ -87,6 +88,9 @@
     --gap--15: 15px;
     --gap--20: 20px;
     --gap--40: 40px;
+
+    /* Shadow */
+    --shadow: 0px 0px 122px 0px rgba(21, 29, 43, 0.09);
 
     /* Ad Card */
     --ad_card--min: calc(103 * (100vw / 390) );

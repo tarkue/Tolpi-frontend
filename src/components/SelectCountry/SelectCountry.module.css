@@ -18,13 +18,17 @@
     border-bottom-right-radius: 0;
 
     position: absolute;
+    z-index: 2;
     bottom: 0;
+
+    box-shadow: var(--shadow);
+
+    will-change: transform;
 }
 
 .Content {
     display: block;
     overflow-y: auto;
-    overflow-x: hidden;
-
+    width: 100%;
     padding-bottom: var(--indent-20);
 }

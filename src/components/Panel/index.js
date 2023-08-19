@@ -31,7 +31,7 @@ export default function Panel({ children, ActivePanel }) {
     useEffect(() => {
         api.start({
             from: { y: "4dvh", opacity: 0 },
-            to: { y: "0dvh", opacity: 1 }
+            to: { y: "0dvh", opacity: 1 },
         })
     }, [ActivePanel])   
     

@@ -7,6 +7,7 @@ const SelectSize = "var(--font_size--select)"
 const CountrySize = "var(--font_size--country)"
 const VKLinkSize = "var(--font_size--vk_link)"
 const NameSize = "var(--font_size--name)"
+const NotTolpiesWarning = "var(--font_size--not_tolpies)"
 const ButtonTextSize = "var(--font_size--button_text)"
 const MarkSize = "var(--font_size--mark)"
 const TextSize = "var(--font_size--text)"
@@ -21,5 +22,5 @@ export {
     CountrySize, VKLinkSize, NameSize,
     ButtonTextSize, MarkSize, TextSize,
     TimeSize, HeaderSubtitleSize, TrackersTitleSize,
-    ScreenTitleSize
+    ScreenTitleSize, NotTolpiesWarning
 }

@@ -39,3 +39,7 @@ h1, h2, h6, p {
 a, div {
     -webkit-tap-highlight-color: transparent;
 }
+
+::-webkit-scrollbar {
+    width: 0;
+}
