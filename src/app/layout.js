@@ -12,10 +12,18 @@ import { ApolloProvider } from '@apollo/client'
 import client from '@/apollo/client'
 
 import { useAppStore } from '@/store/appStore'
+import { useEffect } from 'react'
+
+import server from "@/server/server";
 
 
 export default function RootLayout({ children }) {
   const popup = useAppStore(state => state.popup)
+  const setCountries = useAppStore(state => state.setCountries);
+
+  useEffect(() => {
+    server.getCountry().then(c => setCountries(c))
+  }, [])
   
   return (
       <html lang="en">

@@ -23,7 +23,6 @@ import { useSpring, animated } from "@react-spring/web";
 import { useMutation } from "@apollo/client";
 import { createUser } from "@/apollo/user";
 
-import server from "@/server/server";
 
 
 export default function Page() {
@@ -48,7 +47,6 @@ export default function Page() {
   const loaderPanel = useAppStore(state => state.loaderPanel);
   const setLoaderPanel = useAppStore(state => state.setLoaderPanel);
 
-  const setCountries = useAppStore(state => state.setCountries);
   const [TolpiUserCreate, createUserData] = useMutation(createUser, {})
   
   // VK INIT 
@@ -63,7 +61,6 @@ export default function Page() {
           }
         }
       })
-      server.getCountry().then(c => setCountries(c))
       bridge.send("VKWebAppInit");
       bridge.send("VKWebAppStorageGet", {
         keys: ["start"]
@@ -73,7 +70,6 @@ export default function Page() {
         } else {
           setPanel(MainName)
         }
-
       })  
     }
     setTimeout(()=> setLoaderPanel(false), 3000)
@@ -94,8 +90,7 @@ export default function Page() {
           setIsAnimate(false)
         }
       })
-    }
-    
+    } 
   }, [isAnimate])
 
   return <animated.div style={springs}>

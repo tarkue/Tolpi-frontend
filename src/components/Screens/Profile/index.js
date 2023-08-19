@@ -136,6 +136,6 @@ export default function Profile() {
         >
             <Span color={accentColor}>Толпи</Span>стория
         </ScreenTitle>
-        <TolpiesList tolpiesList={tolpiesHistory}/>
+        <TolpiesList tolpiesList={tolpiesHistory} profile={true}/>
     </>
 }
