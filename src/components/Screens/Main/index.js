@@ -94,7 +94,7 @@ export default function Main() {
             onClick={() => {setPopup(SelectCountryPopup)}}
         />
         <AdList>
-            <AdCard src={"/bigAd.svg"} type={bigAd} href={ADS_LINKS.BIG_AD}/>
+            <AdCard src={"/bigAdNow.svg"} type={bigAd} href={ADS_LINKS.BIG_AD}/>
             <AdCard src={"/smallAd.svg"} type={smallAd} href={ADS_LINKS.SMALL_AD}/>
         </AdList>
         <Button 
