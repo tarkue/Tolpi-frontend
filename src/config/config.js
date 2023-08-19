@@ -37,8 +37,10 @@ const ADS_LINKS = {
     SMALL_AD: "https://www.tinkoff.ru/cf/5z3xppxmq9a"
 }
 
+const CHAT_URL = "https://vk.com/im?media=&sel=-222099365"
 
 export {
     VK, VK_API_V, APP_ID, StartInfo, 
-    MOST_POPULAR_COUNTRIES, ADS_LINKS
+    MOST_POPULAR_COUNTRIES, ADS_LINKS,
+    CHAT_URL
 }

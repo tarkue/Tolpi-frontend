@@ -7,7 +7,7 @@ import UserCard from "@/components/UserCard"
 
 import { accentColor, blackTextColor } from "@/components/colors"
 
-import { VK } from "@/config/config"
+import { CHAT_URL, VK } from "@/config/config"
 
 import { useAppStore } from "@/store/appStore"
 import { useUserStore } from "@/store/userStore"
@@ -19,16 +19,19 @@ import { useQuery } from "@apollo/client"
 import { getUser } from "@/apollo/user"
 import TolpiesList from "@/components/TolpiesList/TolpiesList"
 import server from "@/server/server"
-import { generateStats } from "@/service/service"
+import { generateStats, sendReportText } from "@/service/service"
 import Loader from "@/components/Loader"
 
 import bridge from '@vkontakte/vk-bridge';
+import { useCopyToClipboard } from "react-use"
 
 
 /**
  * Profile Screen 
 */
 export default function Profile() {
+    const [state, copyToClipboard] = useCopyToClipboard();
+
     const userId = useUserStore(state => state.id)
 
     const setPanel = useAppStore(state => state.setPanel)
@@ -45,6 +48,7 @@ export default function Profile() {
     const [tolpiesHistory, setTolpiesHistory] = useState([])
 
     const [subscribeStatus, setSubscribeStatus] = useState(false)
+
 
     const toggleSubscribe = () => {
         if (!subscribeStatus) {
@@ -101,6 +105,11 @@ export default function Profile() {
         document.body.children[0].scrollTo({top: 0})
     }, [profileId])
 
+    function sendReport() {
+        copyToClipboard(sendReportText(profileId))    
+        return location.href = CHAT_URL
+    }
+      
     return loader ? <Loader panel={true}/> : <>
         <BackHeader 
             title={"Профиль"}
@@ -123,7 +132,7 @@ export default function Profile() {
                 </Button>
                 <Button 
                     icon={<SadEmoti/>} type={Outline} 
-                    color={accentColor}
+                    color={accentColor} onClick={() => sendReport()}
                 >
                     Пожаловаться
                 </Button>
