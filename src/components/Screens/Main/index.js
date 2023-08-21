@@ -21,7 +21,9 @@ import TolpiesList from "@/components/TolpiesList/TolpiesList"
 
 import Spinner from "@/components/Spinner"
 import { tolpiContains } from "@/service/service"
-import { ADS_LINKS } from "@/config/config"
+import { ADS_LINKS, GROUP_VK_ID } from "@/config/config"
+
+import bridge from '@vkontakte/vk-bridge';
 
 
 /**
@@ -94,7 +96,13 @@ export default function Main() {
             onClick={() => {setPopup(SelectCountryPopup)}}
         />
         <AdList>
-            <AdCard src={"/bigAdNow.svg"} type={bigAd} href={ADS_LINKS.BIG_AD}/>
+            <AdCard 
+                src={"/bigAd.svg"} type={bigAd} 
+                onClick={() => {
+                    bridge.send("VKWebAppJoinGroup", {group_id: GROUP_VK_ID})
+                    .then(() => window.open(ADS_LINKS.BIG_AD, '_blank'))
+                }}
+            />
             <AdCard src={"/smallAd.svg"} type={smallAd} href={ADS_LINKS.SMALL_AD}/>
         </AdList>
         <Button 

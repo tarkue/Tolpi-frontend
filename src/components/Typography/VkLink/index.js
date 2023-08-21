@@ -10,10 +10,11 @@ export default function VKLink({children, color, href}) {
     return <a style={
             {
                 fontSize: VKLinkSize, fontFamily: SemiBold, 
-                color: color, lineHeight: NormalLineHeight
+                color: color, lineHeight: NormalLineHeight,
             }
         } 
         href={href}
+        target="_blank"
     >
         { children }
     </a>

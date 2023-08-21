@@ -4,6 +4,7 @@ import { create } from "zustand";
 export const useAppStore = create((set) => ({
     panel: null,
     popup: null,
+    blockScroll: false,
 
     loaderPanel: true,
 
@@ -21,6 +22,10 @@ export const useAppStore = create((set) => ({
 
     setPopup: (popup) => set(state => ({
         popup: popup
+    })),
+
+    setBlockScroll: (blockScroll) => set(state => ({
+        blockScroll: blockScroll
     })),
 
     setLoaderPanel: (loaderPanel) => set(state => ({

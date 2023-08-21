@@ -19,6 +19,7 @@ import server from "@/server/server";
 
 export default function RootLayout({ children }) {
   const popup = useAppStore(state => state.popup)
+  const blockScroll = useAppStore(state => state.blockScroll)
   const setCountries = useAppStore(state => state.setCountries);
 
   useEffect(() => {
@@ -38,7 +39,11 @@ export default function RootLayout({ children }) {
           className={classNames(MontRegular.variable, MontSemiBold.variable)}
         >
           <ApolloProvider client={client}>
-              <RootWrapper style={{overflowY: popup ? "hidden" : "auto"}}>
+              <RootWrapper 
+                style={
+                  {overflowY: (popup || blockScroll) ? "hidden" : "auto"}
+                }
+              >
                 { children }
               </RootWrapper>
           </ApolloProvider>

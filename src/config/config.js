@@ -34,15 +34,17 @@ const MOST_POPULAR_COUNTRIES = [
 
 const ADS_LINKS = {
     BIG_AD: "https://vk.com/tolpi_official",
-    SMALL_AD: "https://www.tinkoff.ru/cf/5z3xppxmq9a"
+    SMALL_AD: "https://vk.com/donut/tolpi_official"
 }
 
 const CHAT_URL = "https://vk.com/im?media=&sel=-222099365"
 
 const HH_AREAS_API = "https://api.hh.ru/areas"
 
+const GROUP_VK_ID = 222099365
+
 export {
     VK, VK_API_V, APP_ID, StartInfo, 
     MOST_POPULAR_COUNTRIES, ADS_LINKS,
-    CHAT_URL, HH_AREAS_API
+    CHAT_URL, HH_AREAS_API, GROUP_VK_ID
 }

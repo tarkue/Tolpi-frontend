@@ -7,58 +7,41 @@ import { accentColor, blackTextColor } from "@/components/colors";
 
 import s from "./Start.module.css"
 
-import { APP_ID, StartInfo, VK_API_V } from "@/config/config";
-import { useState } from "react";
+import { StartInfo } from "@/config/config";
+import { useEffect, useState } from "react";
 
 import bridge from '@vkontakte/vk-bridge';
-import { useUserStore } from "@/store/userStore";
+
 import { useAppStore } from "@/store/appStore";
 import { MainName } from "../names";
-
-import axios from "axios";
 
 
 /**
  * Start Screen 
 */
 export default function Start() {
-    const setToken = useUserStore(state => state.setToken)
+    const setBlockScroll = useAppStore(state => state.setBlockScroll)
 
     const setPanel = useAppStore(state => state.setPanel)
     const [k, setK] = useState(0)
     const info = StartInfo[k]
 
     const buttonHandler = () => {
-        
          if (k == StartInfo.length-1) {
             setPanel(MainName)
             bridge.send("VKWebAppStorageSet", {
                 key: "start",
                 value: "true"
             })
+            setBlockScroll(false)
         } else {
             setK(k+1)
         }
-        
-        //if (token) {
-        //    bridge.send("VKWebAppCallAPIMethod", {
-        //        method: "status.get", 
-        //        params: {
-        //            access_token: token,
-        //            user_id: profileId,
-        //            v: VK_API_V
-        //        }
-        //    })
-        //    .then((data) => {
-        //        setStatus(data.response.text)
-        //        bridge.send("VKWebAppStorageSet", {
-        //            key: "status",
-        //            value: data.response.text
-        //        })
-        //    })
-        //    
-        //  }
     }
+
+    useEffect(() => {
+        setBlockScroll(true)
+    }, [])
     return <>
         <div className={s.Content}>
             <div className={s.StartText}> 

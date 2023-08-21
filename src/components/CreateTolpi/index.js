@@ -13,6 +13,8 @@ import { useAppStore } from "@/store/appStore";
 import { useMutation } from "@apollo/client";
 import { CreateTolpiPopup } from "../Popup/types";
 
+import { easings } from '@react-spring/web'
+
 
 /**
  * Create Tolpi 
@@ -60,7 +62,7 @@ export default function CreateTolpi({ popupView, setPopupView }) {
 
     const country = useAppStore(state => state.country)
 
-    const [postText, setPostText] = useState()
+    const [postText, setPostText] = useState("")
     const [TolpiCreateTolpi, createUserData] = useMutation(createTolpiQL, {})
 
     const tolpiesList = useAppStore(state => state.tolpiesList)
@@ -73,18 +75,32 @@ export default function CreateTolpi({ popupView, setPopupView }) {
                 "country": country
             },
             onCompleted(data) {
-            setTolpiesList([data.createTolpi, ...tolpiesList])
+                close()
+                setTolpiesList([data.createTolpi, ...tolpiesList])
+            },
+            onError() {
+                api.start({
+                    to: [
+                        {x: "-4%"},
+                        {x: "4%"},
+                        {x: "-2%"},
+                        {x: "2%"},
+                        {x: "0%"}
+                    ],
+                    delay: 0,
+                    config: {
+                        duration: 100
+                    }
+                })
             }
         })
-
-        close()
     }
 
     return <animated.div className={s.CreateTolpiWrapper} style={springs}>
         <div className={s.CreateTolpi}>
             <BackHeader title={"Толпи"} onClick={close}/>
             <Input 
-                placeholder={"Расскажите, что будет на встрече"} 
+                placeholder={"Расскажите, что будет на встрече. Не более 500 символов"} 
                 setValue={setPostText}
                 style={{height: "var(--create--input--height)"}}
             />

@@ -52,13 +52,12 @@ export default function Page() {
   // VK INIT 
   useEffect(() => {
     if (!panel) {
-      setPanel(MainName)
       TolpiUserCreate({
         onCompleted(data) {
           if (data.createUser.country) {
             setAppCountry(data.createUser.country)
           }
-          setTimeout(()=> setLoaderPanel(false), 1000)
+          setTimeout(()=> setLoaderPanel(false), 2000)
         }
       })
       bridge.send("VKWebAppGetUserInfo").then(data => upUser(data.id, data.photo_100))
