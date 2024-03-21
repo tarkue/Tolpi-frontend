@@ -1,0 +1,16 @@
+.MoreItem {
+    color: var(--color);
+    
+    display: flex;
+    align-items: center;
+
+    gap: var(--gap--10);
+
+}
+
+.MoreItem svg {
+    stroke: var(--color);
+
+    height: var(--menu-icon-size);
+    width: var(--menu-icon-size);
+}

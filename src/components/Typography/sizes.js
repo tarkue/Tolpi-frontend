@@ -15,6 +15,8 @@ const TimeSize = "var(--font_size--time)"
 const HeaderSubtitleSize = "var(--font_size--header_subtitle)"
 const TrackersTitleSize = "var(--font_size--trackers_title)"
 const ScreenTitleSize = "var(--font_size--screen_title)"
+const MoreItemTextSize = "var(--font_size--more_item_text)"
+
 
 export {
     StartTitleSize, TitleSize, StartButtonTextSize,
@@ -22,5 +24,5 @@ export {
     CountrySize, VKLinkSize, NameSize,
     ButtonTextSize, MarkSize, TextSize,
     TimeSize, HeaderSubtitleSize, TrackersTitleSize,
-    ScreenTitleSize, NotTolpiesWarning
+    ScreenTitleSize, NotTolpiesWarning, MoreItemTextSize
 }

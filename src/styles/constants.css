@@ -1,6 +1,7 @@
 :root { 
     /* Colors */
     --accent: #1769FF;
+    --negative: #EA434A;
 
     --white--primary: #F4F7FC;
     --black--primary: #000;
@@ -60,6 +61,7 @@
     --font_size--not_tolpies: 18px
     --font_size--button_text: 16px;
     --font_size--mark: 16px;
+    --font_size--more_item_text: 16px;
     --font_size--text: 16px;
     --font_size--time: 14px;
     --font_size--header_subtitle: 14px;
@@ -90,7 +92,7 @@
     --gap--40: 40px;
 
     /* Shadow */
-    --shadow: 0px 0px 122px 0px rgba(21, 29, 43, 0.09);
+    --shadow: 0px 0px 30px 0px rgba(21, 29, 43, 0.09);
 
     /* Ad Card */
     --ad_card--min: calc(103 * (100vw / 390) );
@@ -105,6 +107,9 @@
 
     /* Start width */
     --start-width: 310px;
+
+    /* Menu icons size */
+    --menu-icon-size: 22px;
 }
 
 @media only screen and (max-width: 370px) {

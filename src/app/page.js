@@ -52,6 +52,7 @@ export default function Page() {
   // VK INIT 
   useEffect(() => {
     if (!panel) {
+      setPanel(MainName)
       TolpiUserCreate({
         onCompleted(data) {
           if (data.createUser.country) {

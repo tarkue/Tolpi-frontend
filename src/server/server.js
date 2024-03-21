@@ -1,10 +1,10 @@
-import { HH_AREAS_API } from "@/config/config";
+import { API_URL, HH_AREAS_API } from "@/config/config";
 import { getVKLink } from "@/service/service";
 import axios from "axios";
 
 
 const client = axios.create({
-    baseURL: `https://xn--h1afifm.xn--p1ai`,
+    baseURL: `https://${API_URL}}`,
 })
 
 const server = {

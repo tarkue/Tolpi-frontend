@@ -5,17 +5,18 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
+import { API_URL } from '@/config/config';
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: `wss://xn--h1afifm.xn--p1ai/query?${getVKLink()}`, 
+    url: `wss://${API_URL}/query?${getVKLink()}`, 
     retryWait: 1000
 }),
 );
 
 
 const httpLink = createHttpLink({
-  uri: `https://xn--h1afifm.xn--p1ai/query?${getVKLink()}`,
+  uri: `https://${API_URL}/query?${getVKLink()}`,
 });
 
 const splitLink = split(

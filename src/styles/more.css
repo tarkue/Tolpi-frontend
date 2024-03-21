@@ -1,0 +1,8 @@
+.szh-menu-button {
+    background: none;
+    border: none;
+}
+
+.szh-menu__item--hover:hover {
+    background: var(--internal--card_color);
+}

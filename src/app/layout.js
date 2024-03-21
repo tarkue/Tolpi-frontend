@@ -3,6 +3,8 @@ import 'normalize.css'
 import '@/styles/constants.css'
 import '@/styles/global.css'
 
+import '@/styles/more.css'
+
 import { MontRegular, MontSemiBold } from "@/styles/fonts"
 import RootWrapper from "@/components/RootWrapper"
 

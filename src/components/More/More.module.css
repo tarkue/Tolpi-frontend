@@ -1,0 +1,20 @@
+.moreMenu {
+    border-radius: var(--border_radius--18);
+    border: none;
+
+    padding-top: var(--indent-20);
+    padding-bottom: var(--indent-20);
+
+    transform: translate(33px, -7px);
+
+    box-shadow: var(--shadow);
+}
+
+.Dots {
+    height: var(--menu-icon-size);
+    width: var(--menu-icon-size);
+
+
+    opacity: var(--opacity-40);
+    cursor: pointer;
+}

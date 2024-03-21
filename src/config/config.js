@@ -1,5 +1,6 @@
 
 const VK = "https://vk.com/"
+const API_URL = "толпи.рф"
 const VK_API_V = "5.131"
 const APP_ID = 51710210
 
@@ -46,5 +47,6 @@ const GROUP_VK_ID = 222099365
 export {
     VK, VK_API_V, APP_ID, StartInfo, 
     MOST_POPULAR_COUNTRIES, ADS_LINKS,
-    CHAT_URL, HH_AREAS_API, GROUP_VK_ID
+    CHAT_URL, HH_AREAS_API, GROUP_VK_ID,
+    API_URL
 }
